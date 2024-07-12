@@ -6,11 +6,12 @@ from .models import Category
 def product_list(request, category_slug=None):
     products = Product.objects.all().order_by("-date")
     categories = Category.objects.all().order_by("name")
+    category_page = None
     if category_slug is not None:
         category_page = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category_page)
 
-    context = {"products": products, "categories": categories}
+    context = {"products": products, "categories": categories, "category_page": category_page}
 
     return render(request, "products.html", context=context)
 
