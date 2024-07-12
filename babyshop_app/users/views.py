@@ -9,7 +9,7 @@ def user_register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Hesabınız oluşturuldu, giriş yapabilirsiniz")
+            messages.success(request, "Your account has been created, you can log in")
             return redirect("login")
     else:
         form = RegisterForm()
@@ -29,9 +29,9 @@ def user_login(request):
                     login(request, user)
                     return redirect("/")
                 else:
-                    messages.info(request, "Kullanıcı aktif değil")
+                    messages.info(request, "User not active")
             else:
-                messages.info(request, "Giriş bilgilerinizi kontrol ediniz")
+                messages.info(request, "Check your login details")
 
     else:
         form = LoginForm()
