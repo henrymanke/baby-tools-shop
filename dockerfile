@@ -1,11 +1,11 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 # Set the working directory to /app
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY baby-tools-shop/babyshop_app /app
+COPY babyshop_app /app
 
 # Install any needed packages specified in requirements.txt
 # Ensure you have a requirements.txt in the babyshop_app directory or adjust the path below
