@@ -7,8 +7,10 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY babyshop_app /app
 
+# Copy sample data into the container at /app/sample_data
+COPY sample_data /app/sample_data
+
 # Install any needed packages specified in requirements.txt
-# Ensure you have a requirements.txt in the babyshop_app directory or adjust the path below
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 8025 available to the world outside this container
@@ -25,5 +27,9 @@ RUN python manage.py collectstatic --noinput
 # Apply migrations
 RUN python manage.py migrate
 
+# Copy the startup script into the container
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 # Command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8025", "babyshop.wsgi:application"]
+CMD ["/app/start.sh"]
