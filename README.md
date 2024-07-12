@@ -24,13 +24,10 @@ git clone https://github.com/henrymanke/baby-tools-shop.git
 cd baby-tools-shop
 ```
 
-Create a .env file in the project root directory and add the following environment variables:
+Create a .env file in the project root directory and add the following environment variables, to use the samples:
 
 ```plaintext
-DATABASE_URL=sqlite:///db.sqlite3
-SECRET_KEY=myverysecretkey
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+ALLOWED_HOSTS=0.0.0.0
 ```
 
 Build the Docker image:
@@ -45,7 +42,7 @@ DATA_PATH=$HOME/baby-tools-shop-data
 mkdir -p $DATA_PATH
 
 # Run without loading sample data
-docker run --env-file .env --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+docker run --env-file .env --env LOAD_SAMPLE_DATA=false DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 
 # Run with loading sample data
 docker run --env-file .env --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop

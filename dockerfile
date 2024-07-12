@@ -25,5 +25,16 @@ RUN python manage.py collectstatic --noinput
 # Apply migrations
 RUN python manage.py migrate
 
+# Copy the startup script into the container
+RUN chmod +x /app/start.sh
+
+# Create a default .env file
+RUN /bin/bash -c 'echo -e "" > /app/.env'
+
+# Modify .env to set ALLOWED_HOSTS to 0.0.0.0 if LOAD_SAMPLE_DATA is true
+RUN if [ "$LOAD_SAMPLE_DATA" = "true" ]; then \
+    sed -i 's/ALLOWED_HOSTS=.*/ALLOWED_HOSTS=0.0.0.0/' /app/.env; \
+fi
+
 # Command to run the application
 CMD ["/app/start.sh"]
