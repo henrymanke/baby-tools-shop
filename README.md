@@ -30,7 +30,7 @@ Create a .env file in the project root directory and add the following environme
 DATABASE_URL=sqlite:///db.sqlite3
 SECRET_KEY=myverysecretkey
 DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
 ```
 
 Build the Docker image:

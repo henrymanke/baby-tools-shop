@@ -7,8 +7,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY babyshop_app /app
 
-# Copy sample data into the container at /app/sample_data
-COPY sample_data /app/sample_data
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

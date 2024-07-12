@@ -4,7 +4,7 @@
 if [ "$LOAD_SAMPLE_DATA" = "true" ]; then
   echo "Loading sample data..."
   cp /app/sample_data/sample.sqlite3 /app/db.sqlite3
-#   cp -r /app/sample_data/images /app/static/images
+  cp -r /app/sample_data/media /app/media/
 fi
 
 # Start the application
