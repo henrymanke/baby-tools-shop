@@ -28,7 +28,7 @@ RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
 
 # Copy the startup script into the container
-COPY start.sh /app/start.sh
+# COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
 # Command to run the application
