@@ -10,5 +10,10 @@ if [ "$LOAD_SAMPLE_DATA" = "true" ]; then
   echo -e "ALLOWED_HOSTS=0.0.0.0" > /app/.env
 fi
 
+# Load environment variables from .env file if it exists
+if [ -f /app/.env ]; then
+  export $(grep -v '^#' /app/.env | xargs)
+fi
+
 # Start the application
 gunicorn --bind 0.0.0.0:8025 babyshop.wsgi:application
