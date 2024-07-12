@@ -5,6 +5,9 @@ if [ "$LOAD_SAMPLE_DATA" = "true" ]; then
   echo "Loading sample data..."
   cp /app/sample_data/sample.sqlite3 /app/db.sqlite3
   cp -r /app/sample_data/media /app/media/
+
+  # Create .env file with ALLOWED_HOSTS set to 0.0.0.0
+  echo -e "ALLOWED_HOSTS=0.0.0.0" > /app/.env
 fi
 
 # Start the application
