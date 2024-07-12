@@ -31,8 +31,18 @@ docker build -t baby-tools-shop .
 
 Run the application with Docker, setting it up to automatically manage restarts and data persistence:
 ```bash
-docker run --restart unless-stopped -p 8025:8025 -v /path/to/your/data:/data baby-tools-shop
+# Replace DATA_PATH with the actual path to your data directory
+DATA_PATH=/path/to/your/data
+docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 ```
+Alternatively, you can use the current user's home directory to dynamically set the path:
+```bash
+# Use the home directory for data storage
+DATA_PATH=$HOME/baby-tools-shop-data
+mkdir -p $DATA_PATH
+docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+```
+
 
 The application should now be accessible via `http://localhost:8025`.
 
@@ -63,7 +73,9 @@ This application uses environment variables for configuration to enhance securit
 After setting up the environment variables, you can start the application as follows:
 
 ```bash
-docker run --env-file .env --restart unless-stopped -p 8025:8025 -v /path/to/your/data:/data baby-tools-shop
+# Ensure DATA_PATH is set in your environment
+DATA_PATH=$HOME/baby-tools-shop-data
+docker run --env-file .env --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 ```
 
 The application is now running on `http://localhost:8025`.
@@ -73,12 +85,12 @@ To further manage your application's lifecycle, you can execute the following Do
 
 - **Apply database migrations**: Execute the following command to apply migrations:
   ```bash
-  docker exec -it <container_id> python manage.py migrate
+  docker exec -it baby-tools-shop python manage.py migrate
   ```
 
 - **Create an admin user**: To create an admin user, use:
   ```bash
-  docker exec -it <container_id> python manage.py createsuperuser
+  docker exec -it baby-tools-shop python manage.py createsuperuser
   ```
 
 ## Security Notes
