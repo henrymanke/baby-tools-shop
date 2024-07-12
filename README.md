@@ -31,16 +31,16 @@ docker build -t baby-tools-shop .
 
 Run the application with Docker, setting it up to automatically manage restarts and data persistence:
 ```bash
-# Replace DATA_PATH with the actual path to your data directory
-DATA_PATH=/path/to/your/data
-docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
-```
-Alternatively, you can use the current user's home directory to dynamically set the path:
-```bash
 # Use the home directory for data storage
 DATA_PATH=$HOME/baby-tools-shop-data
 mkdir -p $DATA_PATH
-docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+
+# Run without loading sample data
+docker run --env-file .env --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+
+# Run with loading sample data
+docker run --env-file .env --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+
 ```
 
 
