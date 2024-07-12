@@ -42,10 +42,12 @@ DATA_PATH=$HOME/baby-tools-shop-data
 mkdir -p $DATA_PATH
 
 # Run without loading sample data
-docker run --env-file .env --env LOAD_SAMPLE_DATA=false DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+
+
 
 # Run with loading sample data
-docker run --env-file .env --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
+docker run --env DEBUG=True --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 
 ```
 
