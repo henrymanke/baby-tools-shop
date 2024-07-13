@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Loading sample data..."
 cp /app/sample_data/sample.sqlite3 /app/db.sqlite3

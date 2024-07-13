@@ -1,3 +1,4 @@
+#!/bin/sh
 # echo "start.sh"
 # Load environment variables from .env file if it exists
 if [ -f /app/.env ]; then
