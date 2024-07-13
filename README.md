@@ -40,11 +40,13 @@ Run the application with Docker, setting it up to automatically manage restarts 
 # Use the home directory for data storage
 DATA_PATH=$HOME/baby-tools-shop-data
 mkdir -p $DATA_PATH
-
+```
+```bash
 # Run without loading sample data
 docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 
-
+# 
+docker run -it --rm --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH -p 80:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
 
 # Run with loading sample data
 docker run --env DEBUG=True --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
