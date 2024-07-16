@@ -8,6 +8,7 @@ WORKDIR /app
 COPY babyshop_app /app
 
 # Install any needed packages specified in requirements.txt
+# Ensure you have a requirements.txt in the babyshop_app directory or adjust the path below
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 8025 available to the world outside this container
@@ -18,20 +19,15 @@ ENV NAME BabyToolsShop
 ENV DJANGO_SETTINGS_MODULE=babyshop.settings
 ENV PYTHONUNBUFFERED=1
 
+# Ensure scripts are executable
+RUN chmod +x /app/samples.sh /app/start.sh
+
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
 # Apply migrations
-RUN python manage.py migrate
+RUN python manage.py migrate --noinput
 
-# Ensure scripts are executable
-RUN chmod +x /app/samples.sh /app/start.sh
-
-# Create a default .env file
-RUN /bin/bash -c 'echo -e "ALLOWED_HOSTS=0.0.0.0\nDEBUG=True" > /app/.env'
-
-# Set entrypoint to the entrypoint script
-ENTRYPOINT ["/app/start.sh"]
 
 # Command to run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8025", "babyshop.wsgi:application"]

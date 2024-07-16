@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  django:
+    build: .
+    volumes:
+      - static_volume:/app/static
+    expose:
+      - 8025
+    environment:
+      - DEBUG=True
+      - LOAD_SAMPLE_DATA=true
+      - ALLOWED_HOSTS=0.0.0.0
+    command: /app/start.sh
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/data/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+
+volumes:
+  static_volume:
