@@ -15,6 +15,7 @@ The Baby Tools Shop is a Django-based web application designed to provide an eas
 
 ### Prerequisites
 - Docker
+- Docker-Compose -> [install](#docker-compose-install)
 - Git
 
 ### Installation and Launch
@@ -25,8 +26,10 @@ The Baby Tools Shop is a Django-based web application designed to provide an eas
    ```
 
 2. **Create a `.env` file in the project root directory and configure it for initial setup:**
-   ```plaintext
-   LOAD_SAMPLE_DATA=true
+   ```bash
+    cat << EOF > .env
+    LOAD_SAMPLE_DATA=true
+    EOF
    ```
 
 3. **Build and run the Docker image:**
@@ -125,6 +128,27 @@ Contributions are welcome! Feel free to submit issues or pull requests. For any 
 ##### `create_default_admin.py`
 - **Description**: Creates a default admin user via Django's command-line interface if not present.
 - **Purpose**: Streamlines admin user setup during application deployment.
+
+#### Installation
+##### docker-compose-install
+  1. Check if Docker Compose is Installed:
+      ```
+      docker-compose --version
+      ```
+  2. Install Docker Compose (if it's not installed)
+      For Linux, you can install Docker Compose by following these steps
+      ```
+      sudo curl -L "https://github.com/docker/compose/releases/download/v2.15.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      sudo chmod +x /usr/local/bin/docker-compose
+      ```
+  3. Add Docker Compose to your PATH (if it’s installed but not found)
+      ```
+      export PATH=$PATH:/usr/local/bin
+      ```
+  4. Verify Installation
+      ```
+      docker-compose --version
+      ```
 
 
 ## Disclaimer
