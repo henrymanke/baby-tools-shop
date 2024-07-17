@@ -6,9 +6,10 @@
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Security Notes](#security-notes)
+- [Project Structure](#project-structure)
 
 ## About the Project
-The Baby Tools Shop is a web application developed using Django. This repository contains all the necessary files to build and run the application in a Docker container. The main purpose of this repository is to provide an easy setup and deployment process for a basic e-commerce platform focusing on baby products.
+The Baby Tools Shop is a Django-based web application designed to provide an easy setup and deployment process for a basic e-commerce platform specializing in baby products. This repository contains all necessary files to build and run the application within a Docker container.
 
 ## Quickstart
 
@@ -17,97 +18,109 @@ The Baby Tools Shop is a web application developed using Django. This repository
 - Git
 
 ### Installation and Launch
-Clone the repository and navigate to the project directory:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/henrymanke/baby-tools-shop.git
+   cd baby-tools-shop
+   ```
 
+2. **Create a `.env` file in the project root directory and configure it for initial setup:**
+   ```plaintext
+   LOAD_SAMPLE_DATA=true
+   ```
+
+3. **Build and run the Docker image:**
+   ```bash
+   docker-compose up --build
+   ```
+
+The application will be accessible via `http://0.0.0.0:80`.
+
+To restart the application without rebuilding, simply run:
 ```bash
-git clone https://github.com/henrymanke/baby-tools-shop.git
-cd baby-tools-shop
+docker-compose up
 ```
-
-Create a .env file in the project root directory and add the following environment variables, to use the samples:
-
-```plaintext
-ALLOWED_HOSTS=0.0.0.0
-```
-
-Build the Docker image:
-```bash
-docker build -t baby-tools-shop .
-```
-
-Run the application with Docker, setting it up to automatically manage restarts and data persistence:
-```bash
-# Use the home directory for data storage
-DATA_PATH=$HOME/baby-tools-shop-data
-mkdir -p $DATA_PATH
-```
-```bash
-# Run without loading sample data
-docker run --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
-
-# 
-docker run -it --rm --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH -p 80:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
-
-# Run with loading sample data
-docker run --env DEBUG=True --env LOAD_SAMPLE_DATA=true --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
-
-```
-
-
-The application should now be accessible via `http://localhost:8025`.
 
 ## Usage
 
 ### Configuration
-This application uses environment variables for configuration to enhance security and protect sensitive data. To set up the environment variables:
+Configure the application using environment variables to secure and customize your setup:
 
-1. Create a file named `.env` in the root directory of your project.
-2. Add the following environment variables to the `.env` file and replace `<YOUR_VALUE>` with actual values:
+1. **Create a `.env` file in the root directory of your project.**
+2. **Define the necessary environment variables. Replace `<YOUR_VALUE>` with actual values where applicable:**
 
    ```plaintext
-   DATABASE_URL=<YOUR_DATABASE_URL>
-   SECRET_KEY=<YOUR_SECRET_KEY>
-   DEBUG=<True/False>
-   ALLOWED_HOSTS=<LIST_OF_HOSTS>
+    # django configuration
+    SECRET_KEY=<your-secret-key-here>
+    ALLOWED_HOSTS=<your-allowed-hosts-list>
+    
+    # admin user credentials
+    ADMIN_USERNAME=<your-admin-username>
+    ADMIN_EMAIL=<your-admin-email>
+    ADMIN_PASSWORD=<your-admin-password>
+    
+    # debugging options
+    PYTHONUNBUFFERED=<python-unbuffered-value>
+    DEBUG=<true-or-false>
+    
+    # sample data
+    LOAD_SAMPLE_DATA=<true-or-false>
    ```
 
-   Example:
+   **Example Configuration:**
    ```plaintext
-   DATABASE_URL=postgres://username:password@localhost:5432/mydatabase
-   SECRET_KEY=myverysecretkey
-   DEBUG=False
-   ALLOWED_HOSTS=localhost,127.0.0.1
+    SECRET_KEY=your_secret_key_here
+    ALLOWED_HOSTS=127.0.0.1,0.0.0.0
+    ADMIN_USERNAME=admin
+    ADMIN_EMAIL=admin@example.com
+    ADMIN_PASSWORD=adminpass
+    PYTHONUNBUFFERED=1
+    DEBUG=true
+    LOAD_SAMPLE_DATA=true
    ```
 
 ### Running the Application
-After setting up the environment variables, you can start the application as follows:
+With the environment variables set, you can manage the application lifecycle as follows:
+- **Start the application**: `docker-compose up`
+- **Stop the application**: `docker-compose down`
 
-```bash
-# Ensure DATA_PATH is set in your environment
-DATA_PATH=$HOME/baby-tools-shop-data
-docker run --env-file .env --env DATA_PATH=$DATA_PATH --restart unless-stopped -p 8025:8025 -v $DATA_PATH:/data --name baby-tools-shop baby-tools-shop
-```
-
-The application is now running on `http://localhost:8025`.
-
-### Useful Commands
-To further manage your application's lifecycle, you can execute the following Docker commands:
-
-- **Apply database migrations**: Execute the following command to apply migrations:
-  ```bash
-  docker exec -it baby-tools-shop python manage.py migrate
-  ```
-
-- **Create an admin user**: To create an admin user, use:
-  ```bash
-  docker exec -it baby-tools-shop python manage.py createsuperuser
-  ```
+The application is accessible at `http://127.0.0.1:80` and `http://0.0.0.0:80` -> Depending on example `.env`
 
 ## Security Notes
-- Do not store SSH keys, passwords, tokens, or usernames in your code. Use environment variables instead.
-- Avoid storing sensitive information such as IP addresses in the Git repository.
-- Follow the naming conventions for environment variables and shell variables to prevent errors in code interpretation.
+- **Sensitive Data**: Do not store SSH keys, passwords, tokens, or usernames in your code. Always use environment variables.
+- **Repository Security**: Avoid storing sensitive information such as IP addresses in your Git repository.
+- **Environment Variables**: Follow proper naming conventions for environment variables and shell variables to prevent errors in code interpretation.
 
-Feel free to contribute to this project by submitting issues or pull requests. For any questions, please submit an issue on GitHub.
+Contributions are welcome! Feel free to submit issues or pull requests. For any questions, please open an issue on GitHub.
 
-This update integrates the Docker configurations fully into the quick start and usage sections, emphasizing best practices for security and data persistence.
+### Project Structure
+
+#### Additional Files and Directories Description
+
+##### `docker-compose.yml`
+- **Description**: Defines Docker services, networks, and volumes for the application setup.
+- **Purpose**: Simplifies container management and deployment.
+
+##### `nginx/`
+- **Description**: Contains Nginx-specific configurations for reverse proxy settings.
+  - `dockerfile`: Sets up the Nginx server within a Docker container.
+  - `nginx.conf`: Configures server settings for request handling and forwarding.
+  
+- **Purpose**: Enhances application performance and security.
+
+##### `samples.sh`
+- **Description**: Loads sample data into the Django database and manages media files.
+- **Purpose**: Facilitates development and testing by providing a pre-populated data environment.
+
+##### `start.sh`
+- **Description**: Manages application startup processes inside the Docker container.
+- **Purpose**: Automates application initialization and server management.
+
+##### `create_default_admin.py`
+- **Description**: Creates a default admin user via Django's command-line interface if not present.
+- **Purpose**: Streamlines admin user setup during application deployment.
+
+
+## Disclaimer
+
+This project is provided as-is, without any tests. It has not been extensively tested in production environments. Users should be aware that there are inherent risks involved in deploying a project without a comprehensive suite of tests. Please use caution and consider adding your own tests before going live with this application in a production environment.
