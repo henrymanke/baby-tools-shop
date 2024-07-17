@@ -50,6 +50,9 @@ Configure the application using environment variables to secure and customize yo
 2. **Define the necessary environment variables. Replace `<YOUR_VALUE>` with actual values where applicable:**
 
    ```plaintext
+    # custom port
+    PUBLIC_PORT=<your-port>
+    
     # django configuration
     SECRET_KEY=<your-secret-key-here>
     ALLOWED_HOSTS=<your-allowed-hosts-list>
@@ -69,6 +72,7 @@ Configure the application using environment variables to secure and customize yo
 
    **Example Configuration:**
    ```plaintext
+    PUBLIC_PORT=8025
     SECRET_KEY=your_secret_key_here
     ALLOWED_HOSTS=127.0.0.1,0.0.0.0
     ADMIN_USERNAME=admin
@@ -84,7 +88,7 @@ With the environment variables set, you can manage the application lifecycle as 
 - **Start the application**: `docker-compose up`
 - **Stop the application**: `docker-compose down`
 
-The application is accessible at `http://127.0.0.1:80` and `http://0.0.0.0:80` -> Depending on example `.env`
+The application is accessible at `http://127.0.0.1:8025` and `http://0.0.0.0:8025` -> Depending on example `.env`
 
 ## Security Notes
 - **Sensitive Data**: Do not store SSH keys, passwords, tokens, or usernames in your code. Always use environment variables.

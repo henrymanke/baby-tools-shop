@@ -27,7 +27,7 @@ services:
       - static_volume:/data/staticfiles
       - media_volume:/data/media
     ports:
-      - "80:80"
+      - "${PUBLIC_PORT:-80}:80"
     depends_on:
       - django
 
