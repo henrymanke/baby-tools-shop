@@ -7,9 +7,9 @@ services:
     expose:
       - 8025
     environment:
-      - DEBUG=True
-      - LOAD_SAMPLE_DATA=true
-      - ALLOWED_HOSTS=0.0.0.0
+      DEBUG: ${DEBUG-True}
+      LOAD_SAMPLE_DATA: ${LOAD_SAMPLE_DATA-true}
+      ALLOWED_HOSTS: 0.0.0.0, ${ALLOWED_HOSTS}
     command: /app/start.sh
 
   nginx:
