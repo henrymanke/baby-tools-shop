@@ -1,17 +1,18 @@
 version: '3.8'
 services:
   django:
-    build: 
+    build:
       context: .
       args:
-          SECRET_KEY: ${SECRET_KEY:-insecure-7j(@z8g0qc0hsl3wiqp55_ult3k3g&lh17@643@*g_q=sikrxr}
-          PYTHONUNBUFFERED: ${PYTHONUNBUFFERED:-0}
-          ADMIN_USERNAME: ${ADMIN_USERNAME}
-          ADMIN_EMAIL: ${ADMIN_EMAIL}
-          ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-          DEBUG: ${DEBUG:-false}
-          ALLOWED_HOSTS: ${ALLOWED_HOSTS:-0.0.0.0}
-          LOAD_SAMPLE_DATA: ${LOAD_SAMPLE_DATA:-false}
+        SECRET_KEY: ${SECRET_KEY:-insecure-7j(@z8g0qc0hsl3wiqp55_ult3k3g&lh17@643@*g_q=sikrxr}
+        PYTHONUNBUFFERED: ${PYTHONUNBUFFERED:-0}
+        ADMIN_USERNAME: ${ADMIN_USERNAME}
+        ADMIN_EMAIL: ${ADMIN_EMAIL}
+        ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+        DEBUG: ${DEBUG:-false}
+        ALLOWED_HOSTS: ${ALLOWED_HOSTS:-0.0.0.0}
+        CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://0.0.0.0:80}
+        LOAD_SAMPLE_DATA: ${LOAD_SAMPLE_DATA:-false}
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media

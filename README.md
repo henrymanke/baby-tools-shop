@@ -52,10 +52,11 @@ Configure the application using environment variables to secure and customize yo
    ```plaintext
     # custom port
     PUBLIC_PORT=<your-port>
-    
+
     # django configuration
     SECRET_KEY=<your-secret-key-here>
     ALLOWED_HOSTS=<your-allowed-hosts-list>
+    CSRF_TRUSTED_ORIGINS=<your-trusted-origins-list>
     
     # admin user credentials
     ADMIN_USERNAME=<your-admin-username>
@@ -75,6 +76,7 @@ Configure the application using environment variables to secure and customize yo
     PUBLIC_PORT=8025
     SECRET_KEY=your_secret_key_here
     ALLOWED_HOSTS=127.0.0.1,0.0.0.0
+    CSRF_TRUSTED_ORIGINS=http://0.0.0.0:8025,http://localhost,http://127.0.0.1
     ADMIN_USERNAME=admin
     ADMIN_EMAIL=admin@example.com
     ADMIN_PASSWORD=adminpass
