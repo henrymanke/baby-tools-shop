@@ -1,0 +1,82 @@
+[
+{
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+        "name": "Nursery",
+        "slug": "nursery"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+        "name": "Feeding",
+        "slug": "feeding"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+        "name": "Diapering",
+        "slug": "diapering"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+        "name": "Clothing",
+        "slug": "clothing"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "name": "Stylish Wooden Baby Crib",
+        "description": "This elegant wooden baby crib features a white mattress and soft bedding. With its modern design and natural wood finish, it adds a touch of sophistication to any nursery. Ideal for creating a cozy and serene environment for your baby.",
+        "image": "products/2024/07/12/8b7b8244-a215-4c73-89be-eb2f51a05b03.webp",
+        "date": "2024-07-12",
+        "price": "299.99",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "name": "Compact High Chair",
+        "description": "A sleek and modern high chair that provides comfort and safety for your baby during mealtimes. Its compact design makes it perfect for small spaces, and the easy-to-clean surfaces ensure hassle-free maintenance.",
+        "image": "products/2024/07/12/high_chair.webp",
+        "date": "2024-07-12",
+        "price": "89.99",
+        "category": 2
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "name": "Deluxe Diaper Changing Pad",
+        "description": "This deluxe diaper changing pad offers a cushioned surface for your baby's comfort and safety. The waterproof cover is easy to clean, making diaper changes a breeze. Designed to fit most changing tables.",
+        "image": "products/2024/07/12/changing_pad.webp",
+        "date": "2024-07-12",
+        "price": "29.99",
+        "category": 3
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "name": "Cozy Onesies",
+        "description": "These cozy onesies are made from soft, breathable cotton to keep your baby comfortable all day. The snap closures make dressing and diaper changes quick and easy.",
+        "image": "products/2024/07/12/baby_onesies.webp",
+        "date": "2024-07-12",
+        "price": "19.99",
+        "category": 5
+    }
+}
+]

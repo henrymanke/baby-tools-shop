@@ -23,11 +23,13 @@ ENV PYTHONUNBUFFERED=1
 RUN chmod +x /app/samples.sh /app/start.sh
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --noinput
 
 # Apply migrations
-RUN python manage.py migrate --noinput
+RUN python3 manage.py migrate --noinput
 
+# Create Default admin
+RUN python3 manage.py create_default_admin
 
 # Command to run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8025", "babyshop.wsgi:application"]

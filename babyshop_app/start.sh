@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Create Default admin
-python manage.py create_default_admin
-
 # Load environment variables from .env file if it exists
 if [ -f /app/.env ]; then
   export $(grep -v '^#' /app/.env | xargs)
