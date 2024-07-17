@@ -1,14 +1,26 @@
 #!/bin/sh
 
+# Ensure script stops on error
+set -e
+
 echo "Loading sample data..."
-# OLD - import DB instead of importing samples
-# cp /app/sample_data/sample.sqlite3 /app/db.sqlite3
 
-# Creating import data with
-# python3 manage.py dumpdata products --indent 4 > products/fixtures/products_data.json
+# Check if Django project directory is correctly set as the working directory
+if [ ! -f manage.py ]; then
+    echo "! Error: manage.py not found. Are you in the right directory?"
+    exit 1
+fi
 
-# import sample data
+# Load sample data from JSON fixture
+echo "Importing fixture data..."
 python3 manage.py loaddata products/fixtures/products_data.json
 
-# import images
-cp -r /app/sample_data/images /app/media/
+# Check if the sample data directory exists before copying
+if [ -d "/app/products/fixtures/images" ]; then
+    echo "Copying sample images to media directory..."
+    cp -r /app/products/fixtures/images/* /app/media/
+else
+    echo "! Warning: Sample image directory does not exist."
+fi
+
+echo "Sample data and images have been loaded successfully."
