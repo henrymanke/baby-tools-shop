@@ -21,6 +21,7 @@ services:
     env_file:
       - .env
     command: /app/start.sh
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
