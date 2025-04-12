@@ -34,14 +34,14 @@ The Baby Tools Shop is a Django-based web application designed to provide an eas
 
 3. **Build and run the Docker image:**
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 The application will be accessible via `http://0.0.0.0:80`.
 
 To restart the application without rebuilding, simply run:
 ```bash
-docker-compose up
+docker compose up
 ```
 
 ## Usage
@@ -90,8 +90,8 @@ Configure the application using environment variables to secure and customize yo
 
 ### Running the Application
 With the environment variables set, you can manage the application lifecycle as follows:
-- **Start the application**: `docker-compose up`
-- **Stop the application**: `docker-compose down`
+- **Start the application**: `docker compose up`
+- **Stop the application**: `docker compose down`
 
 The application is accessible at `http://127.0.0.1:8025` and `http://0.0.0.0:8025` -> Depending on example `.env`
 
@@ -133,7 +133,7 @@ Contributions are welcome! Feel free to submit issues or pull requests. For any 
 ##### docker-compose-install
   1. Check if Docker Compose is Installed:
       ```
-      docker-compose --version
+      docker compose --version
       ```
   2. Install Docker Compose (if it's not installed)
       For Linux, you can install Docker Compose by following these steps
@@ -147,7 +147,7 @@ Contributions are welcome! Feel free to submit issues or pull requests. For any 
       ```
   4. Verify Installation
       ```
-      docker-compose --version
+      docker compose --version
       ```
 
 
