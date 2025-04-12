@@ -11,4 +11,6 @@ if [ "$LOAD_SAMPLE_DATA" = "true" ]; then
 fi
 
 # Start the Gunicorn server
-gunicorn --bind 0.0.0.0:8025 babyshop.wsgi:application
+gunicorn --bind 0.0.0.0:8025 babyshop.wsgi:application \
+  --workers 2 \
+  --timeout 120
