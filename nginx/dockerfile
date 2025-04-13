@@ -5,3 +5,6 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 # Fügen Sie Ihre benutzerdefinierte Konfigurationsdatei hinzu
 COPY nginx.conf /etc/nginx/conf.d
+
+# Halte den Container am Laufen
+CMD ["nginx", "-g", "daemon off;"]
